@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=div#, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div class="header">
+         <h1>To Do list</h1>
+         <input v-model.trim="inputText" type="text" placeholder="یک یادداشت وارد کن" /> 
+         <button @click="addTodo" class="addBtn">اضافه کردن به لیست</button>
+  
+        </div>
+        <ul>
+            <li v-for="(item,index) in todos" :key="item.text"
+             @click=" item.completed = !item.completed"
+             :class="{'checked':item.completed}"
+            >{{ item.text }}
+            <button class="close" @click="deleteTodo(index)">X</button>
+           
+            </li>
+        </li>
+           
+           
+
+        </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script setup>
+    const { createApp } = Vue
+
+  createApp({
+    data() {
+      return {
+        inputText: '',
+        todos:[{text:"todo list1",completed:false},{text:"todo list2",completed:false}]
+      }
+    },
+    methods:{
+        addTodo(){
+          if (this.inputText) {
+            this.todos.push({text:this.inputText,completed:false})
+           this.inputText=''
+           console.log(this.todos);
+            
+          }
+        },
+        deleteTodo(index){
+           this.todos.splice(index,1)
+
+
+        }
+       
+    },
+  }).mount('#app')
+ 
+    </script>
+</body>
+</html>
